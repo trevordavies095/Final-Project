@@ -49,6 +49,7 @@
  {
  	// Local constants
 	const int SIZE = 30;
+ 	const string DEFAULT = "default.txt";
  	
  	// Local variables
  	phrase Array[SIZE];
@@ -59,13 +60,9 @@
 	int Count = 0;
  	
  	/****************************** start insert_file ******************************/
- 	
- 	// Input file name
-	cout << "File name: ";
-	cin >> File_Name;
 	
 	// Open file
-	fs.open(File_Name.c_str());
+	fs.open(DEFAULT.c_str());
 	
 	// IF there's a problem opening the file
 	if(fs.fail())
@@ -86,16 +83,25 @@
 			// Input Category
 			getline(fs, phrase.Category, '-');
 			
+			// Get rid of the space at the end
 			phrase.Category.erase(phrase.Category.length()-1);
 			
 			// Input Phrase
 			getline(fs, phrase.Phrase, '\n');
 			
+			// Get rid of the space at the start
 			phrase.Phrase.erase(0,1);
 			
 			Array[Count] = phrase;
 			
 			Count++;
 		}
+	}
+	
+	for(int i = 0; i < Count; i++)
+	{
+		cout << Array[i].Category << endl;
+		cout << Array[i].Phrase << endl;
+		cout << "----------" << endl;
 	}
  }
