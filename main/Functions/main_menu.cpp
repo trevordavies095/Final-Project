@@ -9,7 +9,8 @@ main()
 	int number = 0;
 	while(number != 4)
 	{
-		switch(number = main_menu())
+		number = main_menu();
+		switch(number)
 		{
 		case 1 : 
 			break;
