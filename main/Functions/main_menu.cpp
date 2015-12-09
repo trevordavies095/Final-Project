@@ -3,11 +3,17 @@
 using namespace std;
 
 int main_menu();
+string enter_player();
+string update_phrase(string, string, string);
 
 main()
 {
 	int Number = 0;
 	int Num_Players = 0;
+	string Game_Phrase = "Hello";
+	string Current_Phrase = "  ll ";
+	string Catagory = "";
+	string Guessed_Letter = "";
 	while(Number != 4)
 	{
 		Number = main_menu();
@@ -48,5 +54,10 @@ string enter_players()
 	string Name = "";
 	cout << "Enter Player Name: ";
 	return Name;
-	
+
 }
+
+
+
+
+
