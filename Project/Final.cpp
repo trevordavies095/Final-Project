@@ -174,8 +174,8 @@ int main()
 
 								heading(Round_Array, Num_Players);
 
-								cout << Current_Phrase << endl;
-								cout << Guessed_Letters << endl;
+								cout << setw(40) << "Phrase: " << Current_Phrase << endl;
+								cout << setw(40) << "Guessed Letters: " << Guessed_Letters << endl;
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -270,19 +270,23 @@ int main()
 
 
 									case 3:
-										cout << Game_Phrase.Category << ": " << endl;
-										cout << Current_Phrase << endl;
-										cout << "Your answer: ";
+										cout << "\n\n";
+										cin.get();
+										cout << setw(40) << "Category: " << Game_Phrase.Category << endl;
+										cout << setw(40) << "Phrase: " << Current_Phrase << endl;
+										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
 
 
-										if((Player_Guess) == (Game_Phrase.Text))
+										if(Player_Guess == Game_Phrase.Text)
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
+											Round_Array[i].Turn = 0;
+											i = Num_Players;
+											cout << "True" << endl;
+											break;
 										}
-
-										break;
 
 
 								}//END TURN_CHOICE SWITCH
@@ -398,32 +402,32 @@ void heading(Player Array[], int Num)
 	switch(Num)
 	{
 		case 1:
-			cout << setw(45) << Array[0].Name << "'s ";
+			cout << setw(30) << Array[0].Name << "'s ";
 			cout << "score: " << Array[0].Score <<  endl;
 			break;
 		case 2:
-			cout << setw(45) << Array[0].Name << "'s ";
+			cout << setw(30) << Array[0].Name << "'s ";
 			cout << "score: " << Array[0].Score << endl;
-			cout << setw(45) << Array[1].Name << "'s ";
+			cout << setw(30) << Array[1].Name << "'s ";
 			cout << "score: " << Array[1].Score <<  endl;
 			break;
 		case 3:
-			cout << setw(45) << Array[0].Name << "'s ";
+			cout << setw(30) << Array[0].Name << "'s ";
 			cout << "score: " << Array[0].Score << endl;
-			cout << setw(45) << Array[1].Name << "'s ";
+			cout << setw(30) << Array[1].Name << "'s ";
 			cout << "score: " << Array[1].Score << endl;
-			cout << setw(45) << Array[2].Name << "'s ";
+			cout << setw(30) << Array[2].Name << "'s ";
 			cout << "score: " << Array[2].Score <<  endl;
 
 			break;
 		case 4:
-			cout << setw(45) << Array[0].Name << "'s ";
+			cout << setw(30) << Array[0].Name << "'s ";
 			cout << "score: " << Array[0].Score << endl;
-			cout << setw(45) << Array[1].Name << "'s ";
+			cout << setw(30) << Array[1].Name << "'s ";
 			cout << "score: " << Array[1].Score << endl;
-			cout << setw(45) << Array[2].Name << "'s ";
+			cout << setw(30) << Array[2].Name << "'s ";
 			cout << "score: " << Array[2].Score <<  endl;
-			cout << setw(45) << Array[3].Name << "'s ";
+			cout << setw(30) << Array[3].Name << "'s ";
 			cout << "score: " << Array[3].Score <<  endl;
 			break;
 		default:
@@ -445,30 +449,33 @@ void heading(Player Array[], int Num)
 
 bool next_round()
 {
-	int Choice = 0;
-
-	while ((Choice != 1) || (Choice != 2))
+	// Local constants
+	
+	// Local variables
+	int Choice;
+	
+	/*****************************************************/
+	
 	cout << "Would you like to play another round? " << endl;
 	cout << "1) Yes " << endl;
 	cout << "2) No " <<endl;
 	cout << "-->  " ;
 	cin >> Choice;
 
+	while (Choice > 2 && Choice < 1)
+	{
+		cout << "Would you like to play another round? " << endl;
+		cout << "1) Yes " << endl;
+		cout << "2) No " <<endl;
+		cout << "-->  " ;
+		cin >> Choice;
+	}
+	
+
 	if(Choice == 1)
-	{
 		return true;
-	}
-
-	else if(Choice == 2)
-	{
-		return false;
-	}
-
 	else
-	{
-		return false;
-	}
-
+		return false
 }
 
 /**************************************************************************
