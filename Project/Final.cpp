@@ -273,13 +273,16 @@ int main()
 										cout << Game_Phrase.Category << ": " << endl;
 										cout << Current_Phrase << endl;
 										cout << "Your answer: ";
-										getline(cin, Player_Guess);
+										cin >> Player_Guess;
+										//getline(cin, Player_Guess);
 
 
 										if((Player_Guess) == (Game_Phrase.Text))
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
+											Round_Array[i].Turn = 0;
+											i = Num_Players;
 										}
 
 										break;
