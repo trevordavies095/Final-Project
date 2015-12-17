@@ -1,12 +1,14 @@
+
+
 /**************************************************************************
 *Function Name      :    Final
 *Author             :    Joe McCarthy, Tyler Myers, Loren Davies
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -76,7 +78,7 @@ int main()
 	bool Round_Continue = true;	// The player chooses to continue to another round
 	bool File_Entered = false;	// Becomes true if the user enters a file
 	bool Solved = false;
-	
+
 	string Display_Phrase;
 
 
@@ -88,18 +90,18 @@ int main()
 
 	//Call the main menu
 	Choice = main_menu();
-	
+
 	// WHILE Choice != QUIT
 	while(Choice != 4)
 	{
-		
+
 		// SWITCH Choice
 		switch(Choice)
 		{
-			
+
 			// They pick start a new game
 			case 1:
-				
+
 				// IF there is no file entered
 				if (!File_Entered)
 				{
@@ -140,12 +142,12 @@ int main()
 					// Make the blank spaces board
 					Current_Phrase = create_blank(Game_Phrase.Text);
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
-					Display_Phrase = init_phrase(Game_Phrase.Text, "");
+
 
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
-						
+
 						//  Set the players names for the round array
 						for(int i = 0; i < Num_Players; i++)
 						{
@@ -171,8 +173,8 @@ int main()
 								}
 
 								heading(Round_Array, Num_Players);
-								
-								cout << Display_Phrase;
+
+								cout << Current_Phrase;
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -192,6 +194,11 @@ int main()
 											{
 												Round_Array[i+1].Turn += 1;
 											}
+											else
+											{
+												i = 0;
+												Round_Array[i].Turn += 1;
+											}
 											break;
 										}// END IF
 
@@ -203,6 +210,11 @@ int main()
 											{
 												Round_Array[i+1].Turn += 1;
 											}
+											else
+											{
+												i = 0;
+												Round_Array[i].Turn +=1;
+											}
 											break;
 
 										}// END IF
@@ -212,8 +224,6 @@ int main()
 											cout << "Input your guess: ";
 											cin >> Player_Guess;
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
-											Display_Phrase = update_phrase(Display_Phrase, Player_Guess, Current_Phrase);
-
 											if(Letter_Value == 0)
 											{
 												Round_Array[i].Turn = 0;
@@ -228,7 +238,7 @@ int main()
 													Round_Array[i].Turn += 1;
 													break;
 												}
-												
+
 											}// END IF
 											else
 											{
@@ -287,7 +297,7 @@ int main()
 				}// END ROUND_CONTINUE WHILE
 
 				break;
-				
+
 			// They pick input a new file
 			case 2:
 				cout << "Enter a file name: ";
@@ -310,13 +320,13 @@ int main()
 
 /**************************************************************************
 *Function Name      :    main_menu
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main_menu
-* 	
+*
 *END main_menu
 **************************************************************************/
 
@@ -335,13 +345,13 @@ int main_menu()
 
 /**************************************************************************
 *Function Name      :    turn_menu
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -360,13 +370,13 @@ int turn_menu()
 
 /**************************************************************************
 *Function Name      :    heading
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -391,7 +401,7 @@ void heading(Player Array[], int Num)
 			cout << "score: " << Array[1].Score << endl;
 			cout << setw(45) << Array[2].Name << "'s ";
 			cout << "score: " << Array[2].Score <<  endl;
-			
+
 			break;
 		case 4:
 			cout << setw(45) << Array[0].Name << "'s ";
@@ -413,10 +423,10 @@ void heading(Player Array[], int Num)
 *Author             :    Joe McCarthy, Tyler Myers, Loren Davies
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -543,52 +553,15 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 
 	return Count;
  }
- 
-/**************************************************************************
-*Function Name      :    init_phrase
-*Author             :    Loren Davies
-*Date               :    12/17/2015
-*Course/Section     :    CSC 263 - 001
-*Program Description:    
-*
-*BEGIN main
-* 	
-*END main
-**************************************************************************/
- 
-  string init_phrase(string Phrase, string Letter)
- {
- 	// Local constants
- 	
- 	// Local variables
- 	string Temp = Phrase;
- 	char c;
- 	
- 	/*************************** Start init_phrase ***************************/
- 	
- 	for(int i = 0; i < Phrase.length(); i++)
- 	{
- 		c = Phrase[i];
- 		
- 		if (isspace(c))
-            Temp.replace(i, i, " ");
-        
-        else
- 			Temp.replace(i, i, "_");
-	}
- 	
- 	return Temp;
- }
-
 /**************************************************************************
 *Function Name      :    spin_wheel
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -640,13 +613,13 @@ int spin_wheel()
 
 /**************************************************************************
 *Function Name      :    Final
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -666,13 +639,13 @@ string create_blank(string Text)
 
 /**************************************************************************
 *Function Name      :    Final
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -680,7 +653,6 @@ int guess_letter(string Text, string &Str , string C)
 {
 	string Temp = "";
 	int Count = 0;
-
 
 	for(int i = 0; i < Str.length(); i++)
 	{
@@ -691,10 +663,7 @@ int guess_letter(string Text, string &Str , string C)
 		}
 		else
 		{
-
 			Temp += Str.at(i);
-
-
 		}
 	}
 	Str = Temp;
@@ -703,13 +672,13 @@ int guess_letter(string Text, string &Str , string C)
 
 /**************************************************************************
 *Function Name      :    Final
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -749,10 +718,10 @@ int element_delete(Phrase Array[],int Count, int Num)
 *Author             :    Loren Davies
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
@@ -778,46 +747,14 @@ void main_heading()
 
 /**************************************************************************
 *Function Name      :    Final
-*Author             :    
+*Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
-*Program Description:    
+*Program Description:
 *
 *BEGIN main
-* 	
+*
 *END main
 **************************************************************************/
 
-string update_phrase(string Game_Phrase, string Guessed_Letter, string Current_Phrase)
-{
-	//Global Constants
-	const string SPACE = " ";			//stores a space
-	
-	//Global Variables
-	string Temp = "";					//Holds the phrase as it updates
-	
-	for(int i = 0; i < Game_Phrase.length(); i++)//counter for checking all characters
-	{
-		if(Current_Phrase.substr(i,1) != SPACE)//If index is not equal to a space
-		{
-			Temp += Current_Phrase.substr(i,1);//Add that index character to temp
-		}
-		else if(Current_Phrase.substr(i,1) == SPACE)//If index is equal to a space
-		{
-			if(Game_Phrase.substr(i,1) == Guessed_Letter)//If index is equal to guessed letter
-			{
-				Temp += Game_Phrase.substr(i,1);//Add that index character to temp
-			}
-			else//If it's not eaual to the guessed letter
-			{
-				Temp += SPACE;//Add that index character to temp
-			} 
-		}
-		else
-		{
-			Temp += " ";
-		}
-	}
-	return Temp;
-	
-}//End update_phrase
+
