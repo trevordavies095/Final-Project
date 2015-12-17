@@ -45,6 +45,7 @@ int guess_letter(string, string&, string);
 int element_delete(Phrase[], int, int);
 int search(Phrase[], int);
 void main_heading();
+string display_phrase(string, string);
 
 
 int main()
@@ -127,7 +128,7 @@ int main()
 					// Get a new random phrase
 					Phrase_Index = rand() % Phrase_Count;
 					Game_Phrase = Array[Phrase_Index];
-					cout << setw(40) << "Phrase: " << Game_Phrase.Text << endl;
+					cout << setw(40) << "Category: " << Game_Phrase.Category << endl;
 
 					// Delete the phrase
 					Phrase_Count = element_delete(Array, Phrase_Count, Phrase_Index);
@@ -149,11 +150,26 @@ int main()
 						//  FOR every player
 						for(int i = 0; i < Num_Players; i++)
 						{
-
 							// WHILE players turn is up
 							while(Round_Array[i].Turn == 1)
 							{
+								if (Round_Array[i].Turn == 0)
+								{
+									if((i+1) == Num_Players)
+									{
+										Round_Array[0].Turn = 1;
+									}
+									else
+									{
+										Round_Array[i+1].Turn = 1;
+									}
+								}
+
 								heading(Round_Array, Num_Players);
+								
+								/*// Display Phrase
+								cout << "Here: ";
+								cout << display_phrase(Game_Phrase.Text, "");*/
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -312,32 +328,33 @@ void heading(Player Array[], int Num)
 	switch(Num)
 	{
 		case 1:
-			cout << setw(45) << Array[0].Name << ": " << endl;
-			cout << setw(45) << "Score: " << Array[0].Score <<  endl;
+			cout << setw(45) << Array[0].Name << "'s ";
+			cout << "score: " << Array[0].Score <<  endl;
 			break;
 		case 2:
-			cout << setw(45) << Array[0].Name << ": ";
-			cout << setw(45) << Array[1].Name << ": " << endl;
-			cout << setw(45) << "Score: " << Array[0].Score;
-			cout << setw(45) << "Score: " << Array[1].Score <<  endl;
+			cout << setw(45) << Array[0].Name << "'s ";
+			cout << "score: " << Array[0].Score << endl;
+			cout << setw(45) << Array[1].Name << "'s ";
+			cout << "score: " << Array[1].Score <<  endl;
 			break;
 		case 3:
-			cout << setw(45) << Array[0].Name << ": ";
-			cout << setw(45) << Array[1].Name << ": ";
-			cout << setw(45) << Array[2].Name << ": " << endl;
-			cout << setw(45) << "Score: " << Array[0].Score;
-			cout << setw(45) << "Score: " << Array[1].Score;
-			cout << setw(45) << "Score: " << Array[2].Score <<  endl;
+			cout << setw(45) << Array[0].Name << "'s ";
+			cout << "score: " << Array[0].Score << endl;
+			cout << setw(45) << Array[1].Name << "'s ";
+			cout << "score: " << Array[1].Score << endl;
+			cout << setw(45) << Array[2].Name << "'s ";
+			cout << "score: " << Array[2].Score <<  endl;
+			
 			break;
 		case 4:
-			cout << setw(45) << Array[0].Name << ": ";
-			cout << setw(45) << Array[1].Name << ": ";
-			cout << setw(45) << Array[2].Name << ": ";
-			cout << setw(45) << Array[3].Name << ": " << endl;
-			cout << setw(45) << "Score: " << Array[0].Score;
-			cout << setw(45) << "Score: " << Array[1].Score;
-			cout << setw(45) << "Score: " << Array[2].Score;
-			cout << setw(45) << "Score: " << Array[3].Score <<  endl;
+			cout << setw(45) << Array[0].Name << "'s ";
+			cout << "score: " << Array[0].Score << endl;
+			cout << setw(45) << Array[1].Name << "'s ";
+			cout << "score: " << Array[1].Score << endl;
+			cout << setw(45) << Array[2].Name << "'s ";
+			cout << "score: " << Array[2].Score <<  endl;
+			cout << setw(45) << Array[3].Name << "'s ";
+			cout << "score: " << Array[3].Score <<  endl;
 			break;
 		default:
 			cout << "Invalid Input";
@@ -466,6 +483,39 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 	}
 
 	return Count;
+ }
+ 
+ string display_phrase(string Phrase, string Letter)
+ {
+ 	// Local constants
+ 	
+ 	// Local variables
+ 	string Temp = Phrase;
+ 	char c;
+ 	
+ 	/*************************** Start display_phrase ***************************/
+ 	
+ 	for(int i = 0; i < Phrase.length(); i++)
+ 	{
+ 		c = Phrase[i];
+ 		
+ 		if(isspace(c))
+		{
+			Temp.replace(i, i, " ");
+		}
+		
+ 		else if(c == Letter[i])
+ 		{
+ 			Temp.replace(i, i, Letter);
+		}
+		
+		else
+		{
+			Temp.replace(i, i, "_");
+		}
+	}
+ 	
+ 	return Temp;
  }
 
 //User spins the wheel
