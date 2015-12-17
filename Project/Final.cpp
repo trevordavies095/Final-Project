@@ -277,15 +277,17 @@ int main()
 										//getline(cin, Player_Guess);
 
 
-										if((Player_Guess) == (Game_Phrase.Text))
+										if(Player_Guess == Game_Phrase.Text)
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
 											i = Num_Players;
+											cout << "True" << endl;
+											break;
 										}
 
-										break;
+										//break;
 
 
 								}//END TURN_CHOICE SWITCH
