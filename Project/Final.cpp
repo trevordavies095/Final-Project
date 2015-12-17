@@ -265,7 +265,20 @@ int main()
 										break;
 
 									case 2:
-										cout << "Enter a vowel for $250: ";
+										if(Round_Array[i].Score < 250)
+										{
+											cout << " You don't have enough to buy a vowel" << endl;
+										}
+										else
+										{
+											cout << "Enter a vowel for $250: ";
+											cin >> Player_Guess;
+											Round_Array[i].Score -= 250;
+											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
+											Guessed_Letters += Player_Guess + ", ";
+										}
+										
+										
 										break;
 
 
