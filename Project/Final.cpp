@@ -226,6 +226,7 @@ int main()
 												{
 													i = 0;
 													Round_Array[i].Turn += 1;
+													break;
 												}
 												
 											}// END IF
@@ -238,6 +239,7 @@ int main()
 
 
 										}//END ELSE
+										break;
 
 									case 2:
 										cout << "Enter a vowel for $250: ";
@@ -306,6 +308,18 @@ int main()
 
 }// END MAIN PROGRAM
 
+/**************************************************************************
+*Function Name      :    main_menu
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main_menu
+* 	
+*END main_menu
+**************************************************************************/
+
 // Main menu
 int main_menu()
 {
@@ -318,6 +332,18 @@ int main_menu()
 	cin >> Choice;
 	return Choice;
 }
+
+/**************************************************************************
+*Function Name      :    turn_menu
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
 
 //Turn menu
 int turn_menu()
@@ -332,7 +358,18 @@ int turn_menu()
 	return Choice;
 }
 
-//Heading
+/**************************************************************************
+*Function Name      :    heading
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 void heading(Player Array[], int Num)
 {
 	switch(Num)
@@ -370,6 +407,18 @@ void heading(Player Array[], int Num)
 			cout << "Invalid Input";
 	}
 }
+
+/**************************************************************************
+*Function Name      :    next_round
+*Author             :    Joe McCarthy, Tyler Myers, Loren Davies
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
 
 bool next_round()
 {
@@ -495,6 +544,18 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 	return Count;
  }
  
+/**************************************************************************
+*Function Name      :    init_phrase
+*Author             :    Loren Davies
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+ 
   string init_phrase(string Phrase, string Letter)
  {
  	// Local constants
@@ -518,31 +579,19 @@ int insert_file(string File_Name, Phrase Array[], int Count)
  	
  	return Temp;
  }
- /*
- string update_phrase(string Display_Phrase, string Current_Phrase, string Letter)
- {
- 	// Local constants
- 	
- 	// Local variables
- 	string Temp = Current_Phrase;
- 	
- 	char c;
- 	
- 	/*************************** Start display_phrase ***************************
- 	
- 	for(int i = 0; i < Current_Phrase.length(); i++)
- 	{
- 		c = Temp[i];
- 		
- 		if(c == Letter[0])
- 			Display_Phrase.replace(i, i, Letter);
-	}
-	
-	return Display_Phrase;
- 	
- }*/
 
-//User spins the wheel
+/**************************************************************************
+*Function Name      :    spin_wheel
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 int spin_wheel()
 {
 	// Local constants
@@ -589,7 +638,18 @@ int spin_wheel()
 	return num;
 }
 
-//Create_Blank
+/**************************************************************************
+*Function Name      :    Final
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 string create_blank(string Text)
 {
 	string Str;
@@ -604,7 +664,18 @@ string create_blank(string Text)
 
 }
 
-//Guess a letter
+/**************************************************************************
+*Function Name      :    Final
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 int guess_letter(string Text, string &Str , string C)
 {
 	string Temp = "";
@@ -629,6 +700,18 @@ int guess_letter(string Text, string &Str , string C)
 	Str = Temp;
 	return Count;
 }
+
+/**************************************************************************
+*Function Name      :    Final
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
 
 int element_delete(Phrase Array[],int Count, int Num)
 {
@@ -661,6 +744,18 @@ int element_delete(Phrase Array[],int Count, int Num)
 
 } // END delete_game
 
+/**************************************************************************
+*Function Name      :    main_heading
+*Author             :    Loren Davies
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 void main_heading()
 {
 	// Local constants
@@ -681,6 +776,17 @@ void main_heading()
 
 } // END heading
 
+/**************************************************************************
+*Function Name      :    Final
+*Author             :    
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
 
 string update_phrase(string Game_Phrase, string Guessed_Letter, string Current_Phrase)
 {
