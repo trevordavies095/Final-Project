@@ -45,7 +45,8 @@ int guess_letter(string, string&, string);
 int element_delete(Phrase[], int, int);
 int search(Phrase[], int);
 void main_heading();
-string display_phrase(string, string);
+string init_phrase(string, string);
+string update_phrase(string, string, string);
 
 
 int main()
@@ -74,6 +75,8 @@ int main()
 	bool Round_Continue = true;	// The player chooses to continue to another round
 	bool File_Entered = false;	// Becomes true if the user enters a file
 	bool Solved = false;
+	
+	string Display_Phrase;
 
 
 	//Player players[] = PLAYER_ARRAY_SIZE;
@@ -136,6 +139,7 @@ int main()
 					// Make the blank spaces board
 					Current_Phrase = create_blank(Game_Phrase.Text);
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
+					Display_Phrase = init_phrase(Game_Phrase.Text, "");
 
 					// WHILE the puzzle is not solved
 					while(!Solved)
@@ -167,7 +171,7 @@ int main()
 
 								heading(Round_Array, Num_Players);
 								
-								cout << display_phrase(Game_Phrase.Text, Player_Guess);
+								cout << Display_Phrase;
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -207,6 +211,7 @@ int main()
 											cout << "Input your guess: ";
 											cin >> Player_Guess;
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
+											Display_Phrase = update_phrase(Display_Phrase, Current_Phrase, Player_Guess);
 
 											if(Letter_Value == 0)
 											{
@@ -489,7 +494,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 	return Count;
  }
  
- string display_phrase(string Phrase, string Letter)
+  string init_phrase(string Phrase, string Letter)
  {
  	// Local constants
  	
@@ -497,29 +502,43 @@ int insert_file(string File_Name, Phrase Array[], int Count)
  	string Temp = Phrase;
  	char c;
  	
- 	/*************************** Start display_phrase ***************************/
+ 	/*************************** Start init_phrase ***************************/
  	
  	for(int i = 0; i < Phrase.length(); i++)
  	{
  		c = Phrase[i];
  		
- 		if(isspace(c))
-		{
-			Temp.replace(i, i, " ");
-		}
-		
- 		else if(c == Letter[0])
- 		{
- 			Temp.replace(i, i, Letter);
-		}
-		
-		else
-		{
-			Temp.replace(i, i, "_");
-		}
+ 		if (isspace(c))
+            Temp.replace(i, i, " ");
+        
+        else
+ 			Temp.replace(i, i, "_");
 	}
  	
  	return Temp;
+ }
+ 
+ string update_phrase(string Display_Phrase, string Current_Phrase, string Letter)
+ {
+ 	// Local constants
+ 	
+ 	// Local variables
+ 	string Temp = Current_Phrase;
+ 	
+ 	char c;
+ 	
+ 	/*************************** Start display_phrase ***************************/
+ 	
+ 	for(int i = 0; i < Current_Phrase.length(); i++)
+ 	{
+ 		c = Temp[i];
+ 		
+ 		if(c == Letter[0])
+ 			Display_Phrase.replace(i, i, Letter);
+	}
+	
+	return Display_Phrase;
+ 	
  }
 
 //User spins the wheel
