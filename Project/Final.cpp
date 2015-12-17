@@ -49,6 +49,7 @@ string init_phrase(string, string);
 string update_phrase(string, string, string);
 
 
+
 int main()
 {
 
@@ -211,7 +212,7 @@ int main()
 											cout << "Input your guess: ";
 											cin >> Player_Guess;
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
-											Display_Phrase = update_phrase(Display_Phrase, Current_Phrase, Player_Guess);
+											Display_Phrase = update_phrase(Display_Phrase, Player_Guess, Current_Phrase);
 
 											if(Letter_Value == 0)
 											{
@@ -517,7 +518,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
  	
  	return Temp;
  }
- 
+ /*
  string update_phrase(string Display_Phrase, string Current_Phrase, string Letter)
  {
  	// Local constants
@@ -527,7 +528,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
  	
  	char c;
  	
- 	/*************************** Start display_phrase ***************************/
+ 	/*************************** Start display_phrase ***************************
  	
  	for(int i = 0; i < Current_Phrase.length(); i++)
  	{
@@ -539,7 +540,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 	
 	return Display_Phrase;
  	
- }
+ }*/
 
 //User spins the wheel
 int spin_wheel()
@@ -679,3 +680,38 @@ void main_heading()
  	cout << "\n\n\n";
 
 } // END heading
+
+
+string update_phrase(string Game_Phrase, string Guessed_Letter, string Current_Phrase)
+{
+	//Global Constants
+	const string SPACE = " ";			//stores a space
+	
+	//Global Variables
+	string Temp = "";					//Holds the phrase as it updates
+	
+	for(int i = 0; i < Game_Phrase.length(); i++)//counter for checking all characters
+	{
+		if(Current_Phrase.substr(i,1) != SPACE)//If index is not equal to a space
+		{
+			Temp += Current_Phrase.substr(i,1);//Add that index character to temp
+		}
+		else if(Current_Phrase.substr(i,1) == SPACE)//If index is equal to a space
+		{
+			if(Game_Phrase.substr(i,1) == Guessed_Letter)//If index is equal to guessed letter
+			{
+				Temp += Game_Phrase.substr(i,1);//Add that index character to temp
+			}
+			else//If it's not eaual to the guessed letter
+			{
+				Temp += SPACE;//Add that index character to temp
+			} 
+		}
+		else
+		{
+			Temp += " ";
+		}
+	}
+	return Temp;
+	
+}//End update_phrase
