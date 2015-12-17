@@ -214,8 +214,14 @@ int main()
 												if((i+1) != Num_Players)
 												{
 													Round_Array[i+1].Turn = 1;
+													break;
 												}
-												break;
+												else
+												{
+													i = 0;
+													Round_Array[i].Turn += 1;
+												}
+												
 											}// END IF
 											else
 											{
