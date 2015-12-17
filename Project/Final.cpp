@@ -1,3 +1,15 @@
+/**************************************************************************
+*Function Name      :    Final
+*Author             :    Joe McCarthy, Tyler Myers, Loren Davies
+*Date               :    12/17/2015
+*Course/Section     :    CSC 263 - 001
+*Program Description:    
+*
+*BEGIN main
+* 	
+*END main
+**************************************************************************/
+
 #include "Player.h"
 #include <iostream>
 #include <fstream>
@@ -7,13 +19,15 @@
 #include <stdlib.h>
 using namespace std;
 
+
+// Structures
 struct Phrase;
 
 struct Phrase
 {
 	string Category;					// Date of the game
 	string Text;						// Who they played against
-};// END PHRASE
+}; // END PHRASE
 
 // Global Constants
 const int MAX_SIZE = (30);
@@ -37,8 +51,6 @@ int main()
 {
 
 	// Local constants
-
-	const string DEFAULT_PHRASE_FILE = "default.txt";
 	const string BLANK = " ";
 
 	// Local variables
@@ -64,24 +76,30 @@ int main()
 
 
 	//Player players[] = PLAYER_ARRAY_SIZE;
-	/*********Start Main Program**********/
+	/*************************** Start main ***************************/
 
 	// Call main heading
 	main_heading();
 
 	//Call the main menu
 	Choice = main_menu();
+	
+	// WHILE Choice != QUIT
 	while(Choice != 4)
 	{
+		
+		// SWITCH Choice
 		switch(Choice)
 		{
-			//They pick start a new game
+			
+			// They pick start a new game
 			case 1:
+				
 				// IF there is no file entered
 				if (!File_Entered)
 				{
 					// Enter default file and set File_Entered to true
-					Phrase_Count = insert_file(DEFAULT_PHRASE_FILE, Array, Phrase_Count);
+					Phrase_Count = insert_file("default.txt", Array, Phrase_Count);
 					File_Entered = true;
 				}
 
@@ -144,7 +162,7 @@ int main()
 									// Sping the wheel
 									case 1:
 										Spin_Value = spin_wheel();
-										cout << Spin_Value;
+										cout << "Points: " << Spin_Value;
 
 										//IF spin value = Bankrupt
 										if (Spin_Value == 1)
@@ -171,8 +189,9 @@ int main()
 										}// END IF
 										else
 										{
+											cout << "\n\n";
 											cout << "Input your guess: ";
-											getline(cin, Player_Guess, '\n');
+											cin >> Player_Guess;
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
 
 											if(Letter_Value == 0)
@@ -240,6 +259,7 @@ int main()
 				}// END ROUND_CONTINUE WHILE
 
 				break;
+				
 			// They pick input a new file
 			case 2:
 				cout << "Enter a file name: ";
@@ -247,7 +267,6 @@ int main()
 				Phrase_Count = insert_file(File_Name, Array, Phrase_Count);
 				File_Entered = true;
 				break;
-
 
 			//They pick view rules and odds
 			case 3:
@@ -278,10 +297,11 @@ int main_menu()
 int turn_menu()
 {
 	int Choice = 0;
-	cout << "1) Spin the wheel" << endl;
-	cout << "2) Buy a vowel" << endl;
-	cout << "3) Solve the puzzle" << endl;
-	cout << "\n--> ";
+	cout << "\n\n\n";
+	cout << setw(49) << "1) Spin the wheel" << endl;
+	cout << setw(46) << "2) Buy a vowel" << endl;
+	cout << setw(51) << "3) Solve the puzzle" << endl;
+	cout << setw(36) << "--> ";
 	cin >> Choice;
 	return Choice;
 }
