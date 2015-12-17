@@ -140,7 +140,7 @@ int main()
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
-
+						
 						//  Set the players names for the round array
 						for(int i = 0; i < Num_Players; i++)
 						{
@@ -167,9 +167,7 @@ int main()
 
 								heading(Round_Array, Num_Players);
 								
-								/*// Display Phrase
-								cout << "Here: ";
-								cout << display_phrase(Game_Phrase.Text, "");*/
+								cout << display_phrase(Game_Phrase.Text, Player_Guess);
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -504,7 +502,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 			Temp.replace(i, i, " ");
 		}
 		
- 		else if(c == Letter[i])
+ 		else if(c == Letter[0])
  		{
  			Temp.replace(i, i, Letter);
 		}
