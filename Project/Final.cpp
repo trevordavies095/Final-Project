@@ -283,9 +283,8 @@ int main()
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
-											i = Num_Players;
+											i = Num_Players - 1;
 											cout << "True" << endl;
-											break;
 										}
 
 
@@ -475,7 +474,7 @@ bool next_round()
 	if(Choice == 1)
 		return true;
 	else
-		return false
+		return false;
 }
 
 /**************************************************************************
