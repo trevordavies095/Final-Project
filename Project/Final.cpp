@@ -174,7 +174,8 @@ int main()
 
 								heading(Round_Array, Num_Players);
 
-								cout << Current_Phrase;
+								cout << Current_Phrase << endl;
+								cout << Guessed_Letters << endl;
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -223,6 +224,18 @@ int main()
 											cout << "\n\n";
 											cout << "Input your guess: ";
 											cin >> Player_Guess;
+											
+											while(Player_Guess == "a" || Player_Guess == "e" || Player_Guess == "i" || Player_Guess == "o" || Player_Guess == "u")
+											{
+												cout << "You have to buy a vowel!" << endl;
+												cout << "\n\n";
+												
+												cout << "Input your guess: ";
+												cin >> Player_Guess;
+											}
+											
+											Guessed_Letters += Player_Guess + ", ";
+											
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
 											if(Letter_Value == 0)
 											{
