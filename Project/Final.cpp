@@ -279,6 +279,8 @@ int main()
 								// Output board and guessed letters
 								cout << setw(40) << "Phrase: " << Current_Phrase << endl;
 								cout << setw(40) << "Guessed Letters: " << Guessed_Letters << endl;
+								
+								cout << "\n" << setw(50) << Round_Array[i].Name << "'s turn";
 
 								// Turn menu
 								Turn_Choice = turn_menu();
@@ -700,6 +702,8 @@ bool next_round()
 	
 	if(Choice == 1)
 	return true;
+	if(Choice == 2)
+    return false;
 }
 
 /**************************************************************************
