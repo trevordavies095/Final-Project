@@ -308,7 +308,10 @@ int main()
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
-											i = Num_Players - 1;
+											if(Num_Players == 1)
+												i = Num_Players - 1;
+											else
+												i = Num_Players + 2;
 										}
 
 
