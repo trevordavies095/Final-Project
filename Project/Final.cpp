@@ -75,6 +75,7 @@ int main()
 	string Current_Phrase = "";
 	string Guessed_Letters;
 	string Player_Guess;
+	string temp = "";
 	bool Round_Continue = true;	// The player chooses to continue to another round
 	bool File_Entered = false;	// Becomes true if the user enters a file
 	bool Solved = false;
@@ -290,7 +291,11 @@ int main()
 										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
 
-
+										//for(int j = 0; j < Player_Guess.length(); j++)
+										//{
+										//	temp += toupper(Player_Guess.at(j));
+										//}
+										//cout << temp << endl;
 										if(Player_Guess == Game_Phrase.Text)
 										{
 											Solved = true;
