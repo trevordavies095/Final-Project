@@ -185,7 +185,9 @@ int main()
 									// Sping the wheel
 									case 1:
 										Spin_Value = spin_wheel();
-										cout << "Points: " << Spin_Value;
+										
+										cout << "\n";
+										cout << setw(40) << "Points: " << Spin_Value;
 
 										//IF spin value = Bankrupt
 										if (Spin_Value == 1)
@@ -222,8 +224,8 @@ int main()
 										}// END IF
 										else
 										{
-											cout << "\n\n";
-											cout << "Input your guess: ";
+											cout << "\n";
+											cout << setw(40) << "Input your guess: ";
 											cin >> Player_Guess;
 											
 											while(Player_Guess == "a" || Player_Guess == "e" || Player_Guess == "i" || Player_Guess == "o" || Player_Guess == "u")
@@ -268,11 +270,12 @@ int main()
 									case 2:
 										if(Round_Array[i].Score < 250)
 										{
-											cout << " You don't have enough to buy a vowel" << endl;
+											cout << "\n";
+											cout << "You don't have enough to buy a vowel" << endl;
 										}
 										else
 										{
-											cout << "Enter a vowel for $250: ";
+											cout << setw(40) << "Enter a vowel for $250: ";
 											cin >> Player_Guess;
 											Round_Array[i].Score -= 250;
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
@@ -290,7 +293,7 @@ int main()
 										cout << setw(40) << "Phrase: " << Current_Phrase << endl;
 										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
-
+										cout << "\n\n";
 										//for(int j = 0; j < Player_Guess.length(); j++)
 										//{
 										//	temp += toupper(Player_Guess.at(j));
@@ -302,7 +305,6 @@ int main()
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
 											i = Num_Players - 1;
-											cout << "True" << endl;
 										}
 
 
@@ -473,10 +475,10 @@ bool next_round()
 	
 	/*****************************************************/
 	
-	cout << "Would you like to play another round? " << endl;
-	cout << "1) Yes " << endl;
-	cout << "2) No " <<endl;
-	cout << "-->  " ;
+	cout << setw(71) << "Would you like to play another round? " << endl;
+	cout << setw(40) << "1) Yes " << endl;
+	cout << setw(39) << "2) No " <<endl;
+	cout << setw(40) << "-->  " ;
 	cin >> Choice;
 
 	while (Choice > 2 && Choice < 1)
