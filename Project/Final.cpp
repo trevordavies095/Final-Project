@@ -145,7 +145,7 @@ int main()
 					Current_Phrase = create_blank(Game_Phrase.Text);
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
 
-
+					Solved = false;
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
