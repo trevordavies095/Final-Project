@@ -254,7 +254,6 @@ int main()
 									Round_Array[i+1].Turn;
 								}
 							}
-							//Round_Array[i].Turn = 1;
 							// WHILE players turn is up
 							while(Round_Array[i].Turn == 1)
 							{
@@ -427,9 +426,22 @@ int main()
 												i = Num_Players - 1;
 											else
 												i = Num_Players + 2;
-
-
-
+											break;
+										}
+										else
+										{
+											Round_Array[i].Turn = 0;
+											if((i+1) != Num_Players)
+											{
+												Round_Array[i+1].Turn = 1;
+												break;
+											}
+											else
+											{
+												i = 0;
+												Round_Array[i].Turn += 1;
+												break;
+											}
 										}
 
 
