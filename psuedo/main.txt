@@ -1,0 +1,93 @@
+begin main
+	Call main heading
+	call the main menu
+	WHILE Choice != QUIT
+		SWITCH CHOICE
+			CASE They pick start a new game
+				IF there's no file entered
+					Enter default file and set File_Entered to true
+				END IF
+				Call main heading
+				Get number of players from the user
+				Get the players names
+				Call main heading
+				WHILE user chooses to continue to another round
+					Get a new random phrase
+					Delete the phrase
+					Make the blank spaces board
+					WHILE the puzzle isn't solved
+						Set the players names for the round array
+						FOR every player
+							WHILE players turn is up
+								IF turn = 0
+									IF i+1 = Number of players
+										Turn = 1
+									END IF
+									ELSE
+										Next player turn = 1
+									END IF
+								END IF
+								Call heading
+								Output board and guessed letters
+								Call turn menu
+								SWITCH Turn_Choice
+									CASE they chose to spin
+										Call spin wheel, output points
+										IF spin is bankrupt
+											Next players turn
+										END IF
+										IF player's turn
+											
+										END IF
+										ELSE
+											Input user's guess
+											WHILE they enter a vowel
+												Input user's guess
+											END WHILE
+											Add letter to guessed letters
+											Call letter_value
+											IF letter_value is 0
+												Next player's turn
+											END IF
+											ELSE
+												Add spin value to score
+											END IF
+										END IF
+									END CASE
+									CASE they buy a vowel
+										IF score < 250 
+											Output error message
+										ELSE
+											Input vowel to buy
+											Decrememnt score
+											Get letter value
+											Add to guessed letter
+										END IF
+									END CASE
+									CASE they choose to solve puzzle
+										Input guess
+										IF guess is correct
+											Set solved to ture
+											Add score to score
+											Next player's turn
+										END IF
+									END CASE
+								END SWITCH
+							END WHILE
+						END FOR
+					END WHILE
+					Ask if they want to play again
+				END WHILE
+			END CASE
+			CASE insert file
+				Input file name
+				Add to Phrase_Count
+				Set File_Entered to true
+			END CASE
+			CASE show rules
+				Output rules
+			END CASE
+		END SWITCH
+		Show main menu
+	END WHILE
+end main

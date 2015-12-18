@@ -1,5 +1,3 @@
-
-
 /**************************************************************************
 *Function Name      :    Final
 *Author             :    Joe McCarthy, Tyler Myers, Loren Davies
@@ -7,9 +5,99 @@
 *Course/Section     :    CSC 263 - 001
 *Program Description:
 *
-*BEGIN main
-*
-*END main
+*begin main
+*	Call main heading
+*	call the main menu
+*	WHILE Choice != QUIT
+*		SWITCH CHOICE
+*			CASE They pick start a new game
+*				IF there's no file entered
+*					Enter default file and set File_Entered to true
+*				END IF
+*				Call main heading
+*				Get number of players from the user
+*				Get the players names
+*				Call main heading
+*				WHILE user chooses to continue to another round
+*					Get a new random phrase
+*					Delete the phrase
+*					Make the blank spaces board
+*					WHILE the puzzle isn't solved
+*						Set the players names for the round array
+*						FOR every player
+*							WHILE players turn is up
+*								IF turn = 0
+*									IF i+1 = Number of players
+*										Turn = 1
+*									END IF
+*									ELSE
+*										Next player turn = 1
+*									END IF
+*								END IF
+*								Call heading
+*								Output board and guessed letters
+*								Call turn menu
+*								SWITCH Turn_Choice
+*									CASE they chose to spin
+*										Call spin wheel, output points
+*										IF spin is bankrupt
+*											Next players turn
+*										END IF
+*										IF player's turn
+*											
+*										END IF
+*										ELSE
+*											Input user's guess
+*											WHILE they enter a vowel
+*												Input user's guess
+*											END WHILE
+*											Add letter to guessed letters
+*											Call letter_value
+*											IF letter_value is 0
+*												Next player's turn
+*											END IF
+*											ELSE
+*												Add spin value to score
+*											END IF
+*										END IF
+*									END CASE
+*									CASE they buy a vowel
+*										IF score < 250 
+*											Output error message
+*										ELSE
+*											Input vowel to buy
+*											Decrememnt score
+*											Get letter value
+*											Add to guessed letter
+*										END IF
+*									END CASE
+*									CASE they choose to solve puzzle
+*										Input guess
+*										IF guess is correct
+*											Set solved to ture
+*											Add score to score
+*											Next player's turn
+*										END IF
+*									END CASE
+*								END SWITCH
+*							END WHILE
+*						END FOR
+*					END WHILE
+*					Ask if they want to play again
+*				END WHILE
+*			END CASE
+*			CASE insert file
+*				Input file name
+*				Add to Phrase_Count
+*				Set File_Entered to true
+*			END CASE
+*			CASE show rules
+*				Output rules
+*			END CASE
+*		END SWITCH
+*		Show main menu
+*	END WHILE
+*end main
 **************************************************************************/
 
 #include "Player.h"
@@ -143,7 +231,8 @@ int main()
 					Current_Phrase = create_blank(Game_Phrase.Text);
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
 
-
+					Solved = false;
+					
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
@@ -160,20 +249,26 @@ int main()
 							// WHILE players turn is up
 							while(Round_Array[i].Turn == 1)
 							{
+								// IF turn = 0
 								if (Round_Array[i].Turn == 0)
 								{
+									// IF i+1 = Number of players
 									if((i+1) == Num_Players)
 									{
+										// Turn = 1
 										Round_Array[0].Turn = 1;
 									}
 									else
 									{
+										// Next player turn = 1
 										Round_Array[i+1].Turn = 1;
 									}
 								}
 
+								// Call heading
 								heading(Round_Array, Num_Players);
 
+								// Output board and guessed letters
 								cout << setw(40) << "Phrase: " << Current_Phrase << endl;
 								cout << setw(40) << "Guessed Letters: " << Guessed_Letters << endl;
 
@@ -183,6 +278,8 @@ int main()
 								{
 									// Sping the wheel
 									case 1:
+										
+										// Call spin wheel
 										Spin_Value = spin_wheel();
 										cout << "Points: " << Spin_Value;
 
@@ -221,10 +318,12 @@ int main()
 										}// END IF
 										else
 										{
+											// Input guess
 											cout << "\n\n";
 											cout << "Input your guess: ";
 											cin >> Player_Guess;
 											
+											// If they enter a vowel
 											while(Player_Guess == "a" || Player_Guess == "e" || Player_Guess == "i" || Player_Guess == "o" || Player_Guess == "u")
 											{
 												cout << "You have to buy a vowel!" << endl;
@@ -234,9 +333,12 @@ int main()
 												cin >> Player_Guess;
 											}
 											
+											// Add guess to guessed letters
 											Guessed_Letters += Player_Guess + ", ";
 											
+											// Call letter_value
 											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
+											
 											if(Letter_Value == 0)
 											{
 												Round_Array[i].Turn = 0;
@@ -265,11 +367,32 @@ int main()
 										break;
 
 									case 2:
-										cout << "Enter a vowel for $250: ";
+										if(Round_Array[i].Score < 250)
+										{
+											cout << " You don't have enough to buy a vowel" << endl;
+										}
+										else
+										{
+											// Input vowel to buy
+											cout << "Enter a vowel for $250: ";
+											cin >> Player_Guess;
+											
+											// Decrememnt score
+											Round_Array[i].Score -= 250;
+											
+											// Get letter value
+											Letter_Value = guess_letter(Game_Phrase.Text , Current_Phrase , Player_Guess);
+											
+											// Add to guessed letter
+											Guessed_Letters += Player_Guess + ", ";
+										}
+										
 										break;
 
 
 									case 3:
+										
+										// Input guess
 										cout << "\n\n";
 										cin.get();
 										cout << setw(40) << "Category: " << Game_Phrase.Category << endl;
@@ -277,13 +400,17 @@ int main()
 										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
 
-
+										// IF guess is correct
 										if(Player_Guess == Game_Phrase.Text)
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
-											i = Num_Players - 1;
+											
+											if(Num_Players == 1)
+												i = Num_Players - 1;
+											else
+												i = Num_Players + 2;
 											cout << "True" << endl;
 										}
 
@@ -297,6 +424,7 @@ int main()
 					}// END SOLVED WHILE
 
 
+					// Play again?
 					Guessed_Letters = "";
 					for(int i = 0; i < Num_Players; i++)
 					{
@@ -316,8 +444,12 @@ int main()
 
 			// They pick input a new file
 			case 2:
+				
+				// Enter file name
 				cout << "Enter a file name: ";
 				cin >> File_Name;
+				
+				// Add to Phrase_Count
 				Phrase_Count = insert_file(File_Name, Array, Phrase_Count);
 				File_Entered = true;
 				break;
@@ -342,20 +474,47 @@ int main()
 *Program Description:
 *
 *BEGIN main_menu
-*
+*	Output the choices
+*	Input choices
+*	WHILE choice is invalid
+*		Output the choices
+*		Input choices
+*	END WHILE
+*	Return choice
 *END main_menu
 **************************************************************************/
 
 // Main menu
 int main_menu()
 {
+	// Local constants
+	
+	// Local variables
 	int Choice = 0;
+	
+	/**********************************************/
+	
+	// Ouput the choices
 	cout << setw(49) << "1) Start new game" << endl;
 	cout << setw(49) << "2) Input new file" << endl;
 	cout << setw(45) << "3) View rules" << endl;
 	cout << setw(40) << "4) Quit " << endl;
 	cout << setw(36) << "--> ";
+	
+	// Input choice
 	cin >> Choice;
+	
+	// WHILE choice is invalid
+	while(Choice < 1 && Choice > 4)
+	{
+		cout << setw(49) << "1) Start new game" << endl;
+		cout << setw(49) << "2) Input new file" << endl;
+		cout << setw(45) << "3) View rules" << endl;
+		cout << setw(40) << "4) Quit " << endl;
+		cout << setw(36) << "--> ";
+	}
+	
+	// Return Choice
 	return Choice;
 }
 
@@ -366,21 +525,52 @@ int main_menu()
 *Course/Section     :    CSC 263 - 001
 *Program Description:
 *
-*BEGIN main
-*
-*END main
+*BEGIN main_menu
+*	Output the choices
+*	Input choices
+*	WHILE choice is invalid
+*		Output the choices
+*		Input the choice
+*	END WHILE
+*	Return choice
+*END main_menu
 **************************************************************************/
 
 //Turn menu
 int turn_menu()
 {
+	// Local constants
+	
+	// Local variables
 	int Choice = 0;
+	
+	/**********************************************/
+	
+	// Output the choices
 	cout << "\n\n\n";
 	cout << setw(49) << "1) Spin the wheel" << endl;
 	cout << setw(46) << "2) Buy a vowel" << endl;
 	cout << setw(51) << "3) Solve the puzzle" << endl;
 	cout << setw(36) << "--> ";
+	
+	// Input the choice
 	cin >> Choice;
+	
+	// WHILE choice is invalid
+	while(Choice < 1 && Choice > 3)
+	{
+		// Output the choices
+		cout << "\n\n\n";
+		cout << setw(49) << "1) Spin the wheel" << endl;
+		cout << setw(46) << "2) Buy a vowel" << endl;
+		cout << setw(51) << "3) Solve the puzzle" << endl;
+			cout << setw(36) << "--> ";
+		
+		// Input the choice
+		cin >> Choice;
+	}
+	
+	// Return choice
 	return Choice;
 }
 
@@ -398,6 +588,12 @@ int turn_menu()
 
 void heading(Player Array[], int Num)
 {
+	// Local constants
+	
+	// Local variables
+	
+	/**********************************************/
+	
 	switch(Num)
 	{
 		case 1:
@@ -493,19 +689,14 @@ bool next_round()
  *	ELSE file did open properly
  *		Read first line, but do nothing with it
  *		WHILE it isn't the end of the file
- *			Input Game_Number add to game
- *			Input Date add to game
- *			Input Opponent add to game
- *			Input Home_Away add to game
- *			IF Home_Away doesn't equal A or H
- *				Add Home_Away to Opponent
- *				Input Home_Away add to game
- *			END IF
- *			Input Score add to game
- *			Input Their_Score add to game
- *			Input Result add to game
- *			Parse and add Game_Number to Game
+ *			Input Category
+ *			Get rid of space at the end
+ *			Input Phrase Text
+ *			Get rid of the space at the start
+ *			Add phrase to array
+ *			Increment count
  *		END WHILE
+ *		Return Count
  *END insertFile
  **************************************************************************/
 int insert_file(string File_Name, Phrase Array[], int Count)
@@ -557,6 +748,7 @@ int insert_file(string File_Name, Phrase Array[], int Count)
 			// Get rid of the space at the start
 			phrase.Text.erase(0,1);
 
+			// Add phrase to Array
 			Array[Count] = phrase;
 
 			Count++;
@@ -598,6 +790,8 @@ int spin_wheel()
 	// Local variables
 	int num = 1;
 	int wheel [MAX_SIZE];
+	
+	/******************************************************/
 
 	// Wheel Values
 	wheel[0] = VALUE1;
@@ -631,24 +825,33 @@ int spin_wheel()
 }
 
 /**************************************************************************
-*Function Name      :    Final
+*Function Name      :    create_blank
 *Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
 *Program Description:
 *
-*BEGIN main
-*
-*END main
+*BEGIN create_blank
+*	FOR every character in the string
+*		Add a - to Str
+*	END FOR
+*	Return Str
+*END create_blank
 **************************************************************************/
 
 string create_blank(string Text)
 {
+	// local constants
+	
+	// Local variables
 	string Str;
-
-
+	
+	/******************************************************/
+	
+	// For every character in the string
 	for(int i = 0;i <Text.length(); i++)
 	{
+		// Add a -
 		Str += "-";
 	}
 
@@ -657,21 +860,26 @@ string create_blank(string Text)
 }
 
 /**************************************************************************
-*Function Name      :    Final
+*Function Name      :    guess_Letter
 *Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
 *Program Description:
 *
-*BEGIN main
+*BEGIN guess_letter
 *
-*END main
+*END guess_letter
 **************************************************************************/
 
 int guess_letter(string Text, string &Str , string C)
 {
+	// Local constants
+	
+	// Local variables
 	string Temp = "";
 	int Count = 0;
+	
+	/*****************************************************/
 
 	for(int i = 0; i < Str.length(); i++)
 	{
@@ -690,7 +898,7 @@ int guess_letter(string Text, string &Str , string C)
 }
 
 /**************************************************************************
-*Function Name      :    Final
+*Function Name      :    element_delete
 *Author             :
 *Date               :    12/17/2015
 *Course/Section     :    CSC 263 - 001
@@ -763,17 +971,3 @@ void main_heading()
  	cout << "\n\n\n";
 
 } // END heading
-
-/**************************************************************************
-*Function Name      :    Final
-*Author             :
-*Date               :    12/17/2015
-*Course/Section     :    CSC 263 - 001
-*Program Description:
-*
-*BEGIN main
-*
-*END main
-**************************************************************************/
-
-
