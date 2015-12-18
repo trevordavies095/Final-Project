@@ -75,7 +75,8 @@ int main()
 	string Current_Phrase = "";
 	string Guessed_Letters;
 	string Player_Guess;
-	string temp = "";
+	string Temp1 = "";
+	string Temp2 = "";
 	bool Round_Continue = true;	// The player chooses to continue to another round
 	bool File_Entered = false;	// Becomes true if the user enters a file
 	bool Solved = false;
@@ -230,10 +231,10 @@ int main()
 											
 											while(Player_Guess == "a" || Player_Guess == "e" || Player_Guess == "i" || Player_Guess == "o" || Player_Guess == "u")
 											{
-												cout << "You have to buy a vowel!" << endl;
-												cout << "\n\n";
+												cout << setw(52) << "You have to buy a vowel!" << endl;
+												cout << "\n";
 												
-												cout << "Input your guess: ";
+												cout << setw(40) << "Input your guess: ";
 												cin >> Player_Guess;
 											}
 											
@@ -271,7 +272,7 @@ int main()
 										if(Round_Array[i].Score < 250)
 										{
 											cout << "\n";
-											cout << "You don't have enough to buy a vowel" << endl;
+											cout << setw(60) << "You don't have enough to buy a vowel\n" << endl;
 										}
 										else
 										{
@@ -294,12 +295,15 @@ int main()
 										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
 										cout << "\n\n";
-										//for(int j = 0; j < Player_Guess.length(); j++)
-										//{
-										//	temp += toupper(Player_Guess.at(j));
-										//}
-										//cout << temp << endl;
-										if(Player_Guess == Game_Phrase.Text)
+										for(int j = 0; j < Player_Guess.length(); j++)
+										{
+											Temp1 += toupper(Player_Guess.at(j));
+										}
+										for (int k = 0; k < Game_Phrase.Text.length(); k++)
+										{
+											Temp2 += toupper(Game_Phrase.Text.at(k));
+										}
+										if(Temp1 == Temp2)
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
