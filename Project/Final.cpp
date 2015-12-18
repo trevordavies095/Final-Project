@@ -232,7 +232,10 @@ int main()
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
 
 					Solved = false;
+<<<<<<< HEAD
 					
+=======
+>>>>>>> origin/master
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
@@ -406,12 +409,18 @@ int main()
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
+<<<<<<< HEAD
 											
+=======
+>>>>>>> origin/master
 											if(Num_Players == 1)
 												i = Num_Players - 1;
 											else
 												i = Num_Players + 2;
+<<<<<<< HEAD
 											cout << "True" << endl;
+=======
+>>>>>>> origin/master
 										}
 
 
