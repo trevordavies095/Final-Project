@@ -224,20 +224,19 @@ int main()
 					Phrase_Index = rand() % Phrase_Count;
 					Game_Phrase = Array[Phrase_Index];
 					cout << setw(40) << "Category: " << Game_Phrase.Category << endl;
-
+					
 					// Delete the phrase
 					Phrase_Count = element_delete(Array, Phrase_Count, Phrase_Index);
 
 					// Make the blank spaces board
 					Current_Phrase = create_blank(Game_Phrase.Text);
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
-
+					
 					Solved = false;
 
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
-
 						//  Set the players names for the round array
 						for(int i = 0; i < Num_Players; i++)
 						{
@@ -247,6 +246,15 @@ int main()
 						//  FOR every player
 						for(int i = 0; i < Num_Players; i++)
 						{
+							while(Round_Array[i].Turn != 1)
+							{
+								Round_Array[i].Turn += 1;
+								if(Round_Array[i].Turn != 1)
+								{
+									Round_Array[i+1].Turn;
+								}
+							}
+							//Round_Array[i].Turn = 1;
 							// WHILE players turn is up
 							while(Round_Array[i].Turn == 1)
 							{
