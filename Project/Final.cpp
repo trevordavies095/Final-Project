@@ -404,15 +404,10 @@ int main()
 										{
 											Temp1 += toupper(Player_Guess.at(j));
 										}
-										cout << Temp1 << endl;
 										for(int k = 0; k < Game_Phrase.Text.length(); k++)
 										{
 											Temp2 += toupper(Game_Phrase.Text.at(k));
 										}
-										cout << Temp1 << endl;
-										cout << Temp2 << endl;
-
-
 
 										// IF guess is correct
 										if(Temp1 == Temp2)
@@ -657,6 +652,7 @@ void heading(Player Array[], int Num)
 *END main
 **************************************************************************/
 
+
 bool next_round()
 {
 	// Local constants
@@ -671,7 +667,7 @@ bool next_round()
 	cout << "2) No " <<endl;
 	cout << "-->  " ;
 	cin >> Choice;
-
+	
 	while (Choice > 2 && Choice < 1)
 	{
 		cout << "Would you like to play another round? " << endl;
@@ -681,11 +677,9 @@ bool next_round()
 		cin >> Choice;
 	}
 	
-
+	
 	if(Choice == 1)
-		return true;
-	else
-		return false;
+	return true;
 }
 
 /**************************************************************************
