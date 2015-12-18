@@ -160,6 +160,7 @@ int main()
 	int Letter_Value = 0;
 	string File_Name = "";		// The users entered file
 	string Temp;
+	string Temp1,Temp2 = "";
 	string Current_Phrase = "";
 	string Guessed_Letters;
 	string Player_Guess;
@@ -232,10 +233,7 @@ int main()
 					guess_letter(Game_Phrase.Text , Current_Phrase , BLANK);
 
 					Solved = false;
-<<<<<<< HEAD
-					
-=======
->>>>>>> origin/master
+
 					// WHILE the puzzle is not solved
 					while(!Solved)
 					{
@@ -402,25 +400,33 @@ int main()
 										cout << setw(40) << "Phrase: " << Current_Phrase << endl;
 										cout << setw(40) << "Your answer: ";
 										getline(cin, Player_Guess);
+										for(int j = 0; j < Player_Guess.length(); j++)
+										{
+											Temp1 += toupper(Player_Guess.at(j));
+										}
+										cout << Temp1 << endl;
+										for(int k = 0; k < Game_Phrase.Text.length(); k++)
+										{
+											Temp2 += toupper(Game_Phrase.Text.at(k));
+										}
+										cout << Temp1 << endl;
+										cout << Temp2 << endl;
+
+
 
 										// IF guess is correct
-										if(Player_Guess == Game_Phrase.Text)
+										if(Temp1 == Temp2)
 										{
 											Solved = true;
 											Player_Array[i].Score += Round_Array[i].Score;
 											Round_Array[i].Turn = 0;
-<<<<<<< HEAD
-											
-=======
->>>>>>> origin/master
 											if(Num_Players == 1)
 												i = Num_Players - 1;
 											else
 												i = Num_Players + 2;
-<<<<<<< HEAD
-											cout << "True" << endl;
-=======
->>>>>>> origin/master
+
+
+
 										}
 
 
